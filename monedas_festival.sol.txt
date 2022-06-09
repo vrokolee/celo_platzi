@@ -1,0 +1,23 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.4;
+
+// Importar paquetes del repositorio de openzeppelin
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+/ Declaración del contrato como instancia de ERC20 con los parámetros iniciales
+// Nombre y símbolo del token
+contract Festival is ERC20, Ownable, ERC20Burnable, {
+    // Declaración del constructor  
+    constructor() ERC20("FIESTA", "FST") {
+        
+        // El emisor del contrato recibirá los tokens iniciales
+        _mint(msg.sender, 1000000 * 10 ** decimals());
+    }
+    
+    // Se habilita la función mint para poder crear más token según la necesidad
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
+}
+
